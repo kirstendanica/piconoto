@@ -3,7 +3,7 @@ document.getElementById('add-note-btn').addEventListener('click', function() {
     const noteTime = parseInt(document.getElementById('note-time').value) || 0;
 
     if (noteInput.trim() === "" || noteTime <= 0) {
-        alert('Please enter a note + start time.');
+        alert('Please enter a note and a valid time.');
         return;
     }
 
@@ -18,8 +18,15 @@ document.getElementById('add-note-btn').addEventListener('click', function() {
     timer.classList.add('timer');
     timer.innerText = `${noteTime}:00`;
 
+    const deleteBtn = document.createElement('button');
+    deleteBtn.innerText = 'Delete';
+    deleteBtn.onclick = () => {
+        notesContainer.removeChild(noteItem);
+    };
+
     noteItem.appendChild(noteText);
     noteItem.appendChild(timer);
+    noteItem.appendChild(deleteBtn);
     notesContainer.appendChild(noteItem);
 
     startTimer(timer, noteTime, noteItem);
